@@ -1,5 +1,5 @@
 {
-    "name": "mikelmi/smart-table",
+    "name": "mikelmi/mks-smart-table",
     "description": "Laravel Server-side processing for angular Smart-Table module",
     "license": "MIT",
     "require": {
