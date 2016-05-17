@@ -1,0 +1,1 @@
+Server side processing for ng-smart-table

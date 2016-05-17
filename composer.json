@@ -1,0 +1,20 @@
+{
+    "name": "mikelmi/smart-table",
+    "description": "Laravel Server-side processing for angular Smart-Table module",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.5.9",
+        "laravel/framework": "5.2.*"
+    },
+    "authors": [
+        {
+            "name": "mike_lmi",
+            "email": "mikelmi84@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Mikelmi\\SmartTable\\": "src"
+        }
+    }
+}
