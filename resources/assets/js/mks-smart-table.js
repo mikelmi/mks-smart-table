@@ -227,7 +227,7 @@
     ]);
 
     // smart-table external search
-    adminDirectives.directive('stWatchQuery', [function() {
+    app.directive('stWatchQuery', [function() {
         return {
             restrict: 'A',
             require:'^stTable',
@@ -243,7 +243,7 @@
     }]);
 
     // smart-table checkbox for selecting row
-    adminDirectives.directive('stSelectRow', [function() {
+    app.directive('stSelectRow', [function() {
         return {
             restrict: 'EA',
             template: '<span class="text-muted glyphicon glyphicon-unchecked st-chk"></span>',
