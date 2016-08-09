@@ -26,7 +26,7 @@ class SmartTableServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../../public' => public_path('vendor/mikelmi/mks-smart-table'),
+            __DIR__.'/../public' => public_path('vendor/mikelmi/mks-smart-table'),
         ], 'public');
     }
 
