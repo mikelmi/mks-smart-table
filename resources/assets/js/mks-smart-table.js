@@ -274,8 +274,8 @@
         }
     }]);
 
-// smart-table checkbox for selecting all rows
-    adminDirectives.directive('stSelectAllRows', [function() {
+    // smart-table checkbox for selecting all rows
+    app.directive('stSelectAllRows', [function() {
         return {
             restrict: 'EA',
             template: '<span class="text-muted glyphicon glyphicon-unchecked st-chk"></span>',
