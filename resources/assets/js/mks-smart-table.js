@@ -265,7 +265,7 @@
                 });
 
                 scope.$watch('row.isSelected', function (newValue, oldValue) {
-                    element.parent().toggleClass('st-selected info', newValue == true);
+                    element.parent().toggleClass('st-selected table-info', newValue == true);
                     element.children().toggleClass('text-muted fa-square-o', newValue !== true)
                         .toggleClass('fa-check-square st-checked', newValue == true);
 
