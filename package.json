@@ -1,0 +1,16 @@
+{
+  "name": "mks-smart-table",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mikelmi84@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-smart-table": "^2.1.8",
+    "jquery": "1.9.1 - 3"
+  }
+}
