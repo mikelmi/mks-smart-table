@@ -5,10 +5,11 @@
     app.run(['$templateCache',
         function ($templateCache) {
             $templateCache.put('template/smart-table/pagination.html',
-                '<nav ng-if="numPages && pages.length >= 2"><ul class="pagination">' +
-                '<li><a href="javascript: void(0);" ng-click="selectPage(1)"><span>&laquo;</span></a></li>' +
-                '<li ng-repeat="page in pages" ng-class="{active: page==currentPage}"><a href="javascript: void(0);" ng-click="selectPage(page)">{{page}}</a></li>' +
-                '<li><a href="javascript: void(0);" ng-click="selectPage(numPages)"><span>&raquo;</span></a></li>' +
+                '<nav ng-if="numPages && pages.length >= 2" aria-label="Page navigation">' +
+                '<ul class="pagination">' +
+                '<li class="page-item"><a class="page-link" href="javascript: void(0);" ng-click="selectPage(1)"><span>&laquo;</span></a></li>' +
+                '<li class="page-item" ng-repeat="page in pages" ng-class="{active: page==currentPage}"><a class="page-link" href="javascript: void(0);" ng-click="selectPage(page)">{{page}}</a></li>' +
+                '<li class="page-item"><a class="page-link" href="javascript: void(0);" ng-click="selectPage(numPages)"><span>&raquo;</span></a></li>' +
                 '</ul></nav>');
         }
     ]);
@@ -227,7 +228,7 @@
     ]);
 
     // smart-table external search
-    app.directive('stWatchQuery', [function() {
+    app.directive('mstWatchQuery', [function() {
         return {
             restrict: 'A',
             require:'^stTable',
@@ -243,12 +244,12 @@
     }]);
 
     // smart-table checkbox for selecting row
-    app.directive('stSelectRow', [function() {
+    app.directive('mstSelectRow', [function() {
         return {
             restrict: 'EA',
-            template: '<span class="text-muted glyphicon glyphicon-unchecked st-chk"></span>',
+            template: '<i class="text-muted fa fa-square-o st-chk"></i>',
             scope: {
-                row: '=stSelectRow'
+                row: '=mstSelectRow'
             },
             link: function (scope, element) {
 
@@ -265,8 +266,8 @@
 
                 scope.$watch('row.isSelected', function (newValue, oldValue) {
                     element.parent().toggleClass('st-selected info', newValue == true);
-                    element.children().toggleClass('text-muted glyphicon-unchecked', newValue !== true)
-                        .toggleClass('glyphicon-check', newValue == true);
+                    element.children().toggleClass('text-muted fa-square-o', newValue !== true)
+                        .toggleClass('fa-check-square', newValue == true);
 
                     scope.$emit('row-selected', newValue);
                 });
@@ -275,12 +276,12 @@
     }]);
 
     // smart-table checkbox for selecting all rows
-    app.directive('stSelectAllRows', [function() {
+    app.directive('mstSelectAllRows', [function() {
         return {
             restrict: 'EA',
-            template: '<span class="text-muted glyphicon glyphicon-unchecked st-chk"></span>',
+            template: '<i class="text-muted fa fa-square-o st-chk"></i>',
             scope: {
-                all: '=stSelectAllRows'
+                all: '=mstSelectAllRows'
             },
             link: function (scope, element) {
                 element.on('click', function (evt) {
@@ -300,8 +301,8 @@
                         }
                     });
 
-                    element.children().toggleClass('text-muted glyphicon-unchecked', scope.isAllSelected !== true)
-                        .toggleClass('glyphicon-check', scope.isAllSelected == true);
+                    element.children().toggleClass('text-muted fa-square-o', scope.isAllSelected !== true)
+                        .toggleClass('fa-check-square', scope.isAllSelected == true);
                 });
 
                 scope.$watch('all', function (newVal, oldVal) {
