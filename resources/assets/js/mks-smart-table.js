@@ -267,7 +267,7 @@
                 scope.$watch('row.isSelected', function (newValue, oldValue) {
                     element.parent().toggleClass('st-selected info', newValue == true);
                     element.children().toggleClass('text-muted fa-square-o', newValue !== true)
-                        .toggleClass('fa-check-square', newValue == true);
+                        .toggleClass('fa-check-square st-checked', newValue == true);
 
                     scope.$emit('row-selected', newValue);
                 });
@@ -302,7 +302,7 @@
                     });
 
                     element.children().toggleClass('text-muted fa-square-o', scope.isAllSelected !== true)
-                        .toggleClass('fa-check-square', scope.isAllSelected == true);
+                        .toggleClass('fa-check-square st-checked', scope.isAllSelected == true);
                 });
 
                 scope.$watch('all', function (newVal, oldVal) {
