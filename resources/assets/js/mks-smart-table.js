@@ -233,10 +233,10 @@
             restrict: 'A',
             require:'^stTable',
             scope:{
-                mkWatchQuery:'='
+                mstWatchQuery:'='
             },
             'link': function(scope, el, attr, ctrl) {
-                scope.$watch('stWatchQuery',function(val){
+                scope.$watch('mstWatchQuery',function(val){
                     ctrl.search(val);
                 });
             }
