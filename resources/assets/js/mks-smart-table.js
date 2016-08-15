@@ -186,8 +186,9 @@
                 }
 
                 row.isLoading = true;
-                $http.post(url).then(function(data){
+                $http.post(url).then(function(response){
                     row.isLoading = false;
+                    var data = response.data;
                     if (data && data.model) {
                         angular.extend(row, data.model);
                     }
@@ -211,7 +212,8 @@
 
                 self.isLoading = true;
 
-                $http.post(url, {id: rowIdentities(selected)}).then(function(data){
+                $http.post(url, {id: rowIdentities(selected)}).then(function(response){
+                    var data = response.data;
                     if (data && data.models) {
                         angular.forEach(selected, function (row) {
                             if (typeof data.models[row[self.idKey]] != 'undefined') {
