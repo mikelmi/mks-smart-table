@@ -2,15 +2,14 @@
   "name": "mks-smart-table",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node ../../../node_modules/cross-env/bin/cross-env.js NODE_ENV=development ../../../node_modules/webpack/bin/webpack.js --progress --hide-modules",
+    "production": "node ../../../node_modules/cross-env/bin/cross-env.js NODE_ENV=production ../../../node_modules/webpack/bin/webpack.js --progress --hide-modules"
   },
   "author": "mikelmi84@gmail.com",
-  "license": "ISC",
-  "dependencies": {
-    "angular": "^1.5.8",
-    "angular-smart-table": "^2.1.8",
-    "jquery": "1.9.1 - 3"
+  "devDependencies": {
+    "angular": "^1.6.2",
+    "angular-smart-table": "^2.1.8"
   }
 }

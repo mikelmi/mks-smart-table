@@ -14,8 +14,8 @@
         }
     ]);
 
-    app.controller('TableCtrl', ['$http', '$q', '$scope', '$filter',
-        function($http, $q, $scope, $filter) {
+    app.controller('TableCtrl', ['$http', '$q', '$scope', '$filter', '$httpParamSerializerJQLike',
+        function($http, $q, $scope, $filter, $httpParamSerializerJQLike) {
 
             this.rows = [];
             this.url = null;
@@ -57,7 +57,7 @@
 
                 var req = {
                     'method': 'GET',
-                    'url': url + '?' + jQuery.param(data),
+                    'url': url + '?' + $httpParamSerializerJQLike(data),
                     'headers': {
                         'X-Requested-With': 'XMLHttpRequest'
                     },
@@ -78,11 +78,13 @@
                 var start = pagination.start || 0;
                 var number = pagination.number || 10;
 
-                getPage(self.url, start, number, tableState).success(function(result) {
+                getPage(self.url, start, number, tableState).then(function(response) {
+                    var result = response.data,
+                        start = 0;
                     self.rows = result.data;
                     tableState.pagination.numberOfPages = result.pages;
 
-                    var start = tableState.pagination.start;
+                    start = tableState.pagination.start;
 
                     self.end = start + self.rows.length;
 
@@ -94,7 +96,7 @@
                     self.total = result.total;
                     self.hasSelected = 0;
                     self.isLoading = false;
-                }).error(function() {
+                }, function() {
                     self.isLoading = false;
                 });
             };
@@ -138,7 +140,7 @@
             };
 
             function rowIdentities(arr) {
-                return jQuery.map(arr, function(val) {
+                return arr.map(function(val) {
                     return val[self.idKey];
                 });
             }
@@ -249,7 +251,7 @@
     app.directive('mstSelectRow', [function() {
         return {
             restrict: 'EA',
-            template: '<i class="text-muted fa fa-square-o st-chk"></i>',
+            template: '<input type="checkbox" class="st-chk" ng-model="row.isSelected" />',
             scope: {
                 row: '=mstSelectRow'
             },
@@ -259,7 +261,7 @@
                     return false;
                 }
 
-                element.on('click', function (evt) {
+                element.on('update', function (evt) {
                     evt.preventDefault();
                     scope.$apply(function () {
                         scope.row.isSelected = !(scope.row.isSelected||0);
@@ -267,9 +269,7 @@
                 });
 
                 scope.$watch('row.isSelected', function (newValue, oldValue) {
-                    element.parent().toggleClass('st-selected table-info', newValue == true);
-                    element.children().toggleClass('text-muted fa-square-o', newValue !== true)
-                        .toggleClass('fa-check-square st-checked', newValue == true);
+                    element.parent().toggleClass('st-selected active', newValue == true);
 
                     scope.$emit('row-selected', newValue);
                 });
@@ -281,12 +281,12 @@
     app.directive('mstSelectAllRows', [function() {
         return {
             restrict: 'EA',
-            template: '<i class="text-muted fa fa-square-o st-chk"></i>',
+            template: '<input type="checkbox" class="st-chk" />',
             scope: {
                 all: '=mstSelectAllRows'
             },
             link: function (scope, element) {
-                element.on('click', function (evt) {
+                element.on('change.clicked', function (evt) {
                     evt.preventDefault();
                     scope.$apply(function () {
                         scope.isAllSelected = !scope.isAllSelected||false;
@@ -302,9 +302,6 @@
                             val.isSelected = scope.isAllSelected || false;
                         }
                     });
-
-                    element.children().toggleClass('text-muted fa-square-o', scope.isAllSelected !== true)
-                        .toggleClass('fa-check-square st-checked', scope.isAllSelected == true);
                 });
 
                 scope.$watch('all', function (newVal, oldVal) {

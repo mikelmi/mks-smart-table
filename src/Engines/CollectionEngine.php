@@ -108,4 +108,15 @@ class CollectionEngine extends BaseEngine implements SmartTableEngine
             $this->request->getCount()
         );
     }
+
+    public function __call($name, $arguments)
+    {
+        if ($name == 'orderBy') {
+            $name = 'sortBy';
+        }
+
+        call_user_func_array([$this->collection, $name], $arguments);
+
+        return $this;
+    }
 }

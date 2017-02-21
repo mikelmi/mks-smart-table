@@ -1,11 +1,13 @@
 <?php
 
 
-namespace Mikelmi\SmartTable;
+namespace Mikelmi\SmartTable\Providers;
 
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use Mikelmi\SmartTable\Request;
+use Mikelmi\SmartTable\SmartTable;
 
 class SmartTableServiceProvider extends ServiceProvider
 {
@@ -26,7 +28,7 @@ class SmartTableServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../public' => public_path('vendor/mikelmi/mks-smart-table'),
+            __DIR__.'/../../public' => public_path('vendor/mikelmi/mks-smart-table'),
         ], 'public');
     }
 
