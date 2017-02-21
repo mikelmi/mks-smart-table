@@ -1,25 +1,33 @@
-## Server side processing for ng-smart-table for Laravel 5
+## Server side processing for angular-smart-table for Laravel 5
 
 This package provides services for server-side processing data for [angular-smart-table](https://lorenzofox3.github.io/smart-table-website/)
 ### Installation
 
 1. Install via composer
+    
     ```
         composer require mikelmi/mks-theme:dev-master
     ```
+
 2. Add the service provider in `config/app.php`, to `providers`:
-    ```
+    
+    ```php
         Mikelmi\SmartTable\Providers\SmartTableServiceProvider::class,
     ```
-3. Publish config
+    
+3. Publish assets
+    
     ```    
         php artisan vendor:publish --provider="Mikelmi\SmartTable\Providers\SmartTableServiceProvider"
     ```
 
 ### Usage
 #### Server side
-Create route for handling smart-table-request
+
+Create route for handling smart-table-request.
+
 Inside the route:
+
 1. Create data source. It can be Query Builder (Eloquent/Database) or Collection
 
     ```php
@@ -33,28 +41,33 @@ Inside the route:
         //...
     ]);
     ```
+
 2. Create SmartTable Engine instance
+    
     ```php
     $engine = app(\Mikelmi\SmartTable\SmartTable::class)->make($source);
     
-    //optional set columns for general search
+    //optionaly set columns for general search
     $engine->setSearchColumns(['name', 'email'])
     ```
 
 3. Apply request
+
     ```php
     $engine->apply();
     
-    //optional apply advanced method for your source, e.g. default sorting
+    //optionaly apply advanced method for your source, e.g. default sorting
     $engine->orderBy('created_at', 'desc');
     ```
 
 4. Return the response
+
     ```php
     return $engine->response();
     ```
 
 #### Client side
+
 1. Include javascript file. This package ships with three js files:
     
     * `mks-smart-table.js` - contains only base functionality, without any libraries

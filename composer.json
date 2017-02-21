@@ -1,6 +1,6 @@
 {
     "name": "mikelmi/mks-smart-table",
-    "description": "Laravel Server-side processing for angular Smart-Table module",
+    "description": "Laravel Server-side processing for angular-smart-table",
     "keywords": ["laravel", "angular", "smart-table", "datagrid", "mks"],
     "license": "MIT",
     "require": {
