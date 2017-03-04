@@ -251,7 +251,10 @@
     app.directive('mstSelectRow', [function() {
         return {
             restrict: 'EA',
-            template: '<input type="checkbox" class="st-chk" ng-model="row.isSelected" />',
+            template: '<label class="custom-control custom-checkbox">' +
+                        '<input type="checkbox" class="custom-control-input st-chk" ng-model="row.isSelected" />' +
+                        '<span class="custom-control-indicator"></span>' +
+                    '</label>',
             scope: {
                 row: '=mstSelectRow'
             },
@@ -269,7 +272,7 @@
                 });
 
                 scope.$watch('row.isSelected', function (newValue, oldValue) {
-                    element.parent().toggleClass('st-selected active', newValue == true);
+                    element.parent().toggleClass('table-active st-selected', newValue == true);
 
                     scope.$emit('row-selected', newValue);
                 });
@@ -281,18 +284,14 @@
     app.directive('mstSelectAllRows', [function() {
         return {
             restrict: 'EA',
-            template: '<input type="checkbox" class="st-chk" />',
+            template: '<label class="custom-control custom-checkbox">' +
+                    '<input type="checkbox" class="custom-control-input st-chk" ng-model="isAllSelected" />' +
+                    '<span class="custom-control-indicator"></span>' +
+                    '</label>',
             scope: {
                 all: '=mstSelectAllRows'
             },
-            link: function (scope, element) {
-                element.on('change.clicked', function (evt) {
-                    evt.preventDefault();
-                    scope.$apply(function () {
-                        scope.isAllSelected = !scope.isAllSelected||false;
-                    });
-                });
-
+            link: function (scope) {
                 scope.$watch('isAllSelected', function () {
                     if (!scope.all) {
                         return;
